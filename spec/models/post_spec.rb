@@ -4,9 +4,7 @@ describe Post do
 
   describe "associations" do
 
-    before(:all) do
-      @post = Post.new
-    end
+    before(:all) { @post = Post.new }
 
     it "has many comments" do
       expect(@post).to have_many(:comments).dependent(:destroy) 
@@ -26,6 +24,36 @@ describe Post do
 
     it "belongs to topic" do
       expect(@post).to belong_to(:topic)
+    end
+  
+  end
+
+  describe "validations" do
+
+    before(:all) { @post = Post.new }
+
+    it "validates title is at least 5 chars long" do
+      expect(@post).to ensure_length_of(:title).is_at_least(5)
+    end
+
+    it "validates title is present" do
+      expect(@post).to validate_presence_of(:title)
+    end
+
+    it "validates body is at least 20 chars long" do
+      expect(@post).to ensure_length_of(:body).is_at_least(20)
+    end
+
+    it "validates body is present" do
+      expect(@post).to validate_presence_of(:body)
+    end
+
+    it "validates topic is present" do
+      expect(@post).to validate_presence_of(:topic)
+    end
+
+    it "validates user is present" do
+      expect(@post).to validate_presence_of(:user)
     end
 
   end
