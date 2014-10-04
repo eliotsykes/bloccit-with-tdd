@@ -20,3 +20,5 @@
 
 # Ignore Carrierwave image
 public/uploads
+
+coverage
