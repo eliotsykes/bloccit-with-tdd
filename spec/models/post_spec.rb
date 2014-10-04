@@ -1,6 +1,34 @@
 require 'rails_helper'
 
 describe Post do 
+
+  describe "associations" do
+
+    before(:all) do
+      @post = Post.new
+    end
+
+    it "has many comments" do
+      expect(@post).to have_many(:comments).dependent(:destroy) 
+    end
+    
+    it "has many votes" do
+      expect(@post).to have_many(:votes).dependent(:destroy) 
+    end
+
+    it "has many favorites" do
+      expect(@post).to have_many(:favorites).dependent(:destroy) 
+    end
+
+    it "belongs to user" do
+      expect(@post).to belong_to(:user)
+    end
+
+    it "belongs to topic" do
+      expect(@post).to belong_to(:topic)
+    end
+
+  end
   
   describe "vote methods" do
 
